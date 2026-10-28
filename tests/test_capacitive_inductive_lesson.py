@@ -49,7 +49,7 @@ def test_offline_html_has_five_navigation_sections_and_one_master_slider() -> No
     assert re.search(r"<link\b[^>]*\bhref\s*=", html, re.I) is None
     # XML namespace identifiers are URLs but do not load external resources.
     allowed_namespaces = {"http://www.w3.org/1999/xlink", "http://www.w3.org/2000/svg"}
-    assert set(re.findall(r'https?://[^"\\s<>]+', html)).issubset(allowed_namespaces)
+    assert set(re.findall(r'https?://[^"\s<>]+', html)).issubset(allowed_namespaces)
     assert "__ASSET_" not in html
     assert "INLINE_" not in html
 
