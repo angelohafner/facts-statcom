@@ -1,0 +1,8 @@
+{
+  "title": "MMC double-star with three half-bridge submodules per arm",
+  "topology": "mmc",
+  "transformer": true,
+  "cells_per_phase": 2,
+  "submodules_per_arm": 3,
+  "chb_connection": "star"
+}

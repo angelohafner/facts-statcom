@@ -1,0 +1,114 @@
+[
+  {
+    "preset": "basic",
+    "config": {
+      "title": "Basic STATCOM connection",
+      "topology": "basic",
+      "transformer": true,
+      "cells_per_phase": 2,
+      "submodules_per_arm": 2,
+      "chb_connection": "star"
+    },
+    "files": [
+      "basic.svg"
+    ]
+  },
+  {
+    "preset": "two-level",
+    "config": {
+      "title": "Three-phase two-level VSC",
+      "topology": "two-level",
+      "transformer": true,
+      "cells_per_phase": 2,
+      "submodules_per_arm": 2,
+      "chb_connection": "star"
+    },
+    "files": [
+      "two-level.svg"
+    ]
+  },
+  {
+    "preset": "npc",
+    "config": {
+      "title": "Three-level diode-clamped NPC VSC",
+      "topology": "npc",
+      "transformer": true,
+      "cells_per_phase": 2,
+      "submodules_per_arm": 2,
+      "chb_connection": "star"
+    },
+    "files": [
+      "npc.svg"
+    ]
+  },
+  {
+    "preset": "chb-star",
+    "config": {
+      "title": "CHB STATCOM | star-connected phase arms",
+      "topology": "chb",
+      "transformer": true,
+      "cells_per_phase": 2,
+      "submodules_per_arm": 2,
+      "chb_connection": "star"
+    },
+    "files": [
+      "chb-star.svg"
+    ]
+  },
+  {
+    "preset": "chb-delta",
+    "config": {
+      "title": "CHB STATCOM | delta-connected phase arms",
+      "topology": "chb",
+      "transformer": true,
+      "cells_per_phase": 2,
+      "submodules_per_arm": 2,
+      "chb_connection": "delta"
+    },
+    "files": [
+      "chb-delta.svg"
+    ]
+  },
+  {
+    "preset": "mmc",
+    "config": {
+      "title": "Double-star MMC-type STATCOM",
+      "topology": "mmc",
+      "transformer": true,
+      "cells_per_phase": 2,
+      "submodules_per_arm": 2,
+      "chb_connection": "star"
+    },
+    "files": [
+      "mmc.svg"
+    ]
+  },
+  {
+    "preset": "complete",
+    "config": {
+      "title": "STATCOM connected to a three-phase grid",
+      "topology": "complete",
+      "transformer": true,
+      "cells_per_phase": 2,
+      "submodules_per_arm": 2,
+      "chb_connection": "star"
+    },
+    "files": [
+      "complete.svg"
+    ]
+  },
+  {
+    "preset": "control",
+    "config": {
+      "title": "STATCOM dq control architecture",
+      "topology": "control",
+      "transformer": true,
+      "cells_per_phase": 2,
+      "submodules_per_arm": 2,
+      "chb_connection": "star"
+    },
+    "files": [
+      "control.svg"
+    ]
+  }
+]

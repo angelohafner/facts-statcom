@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "facts-statcom"
+version = "0.1.0"
+description = "Reusable, editable SVG diagrams for STATCOM and STATCON topologies"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name = "Angelo Alfredo Hafner"}]
+dependencies = []
+
+[project.optional-dependencies]
+png = ["cairosvg>=2.7"]
+dev = ["pytest>=7"]
+
+[project.scripts]
+facts-statcom = "facts_statcom.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

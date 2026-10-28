@@ -1,0 +1,8 @@
+{
+  "title": "CHB delta with three cascaded H-bridge cells per branch",
+  "topology": "chb",
+  "transformer": false,
+  "cells_per_phase": 3,
+  "submodules_per_arm": 2,
+  "chb_connection": "delta"
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Example: three-phase 2L STATCOM converter",
+  "topology": "two-level",
+  "transformer": true,
+  "cells_per_phase": 2,
+  "submodules_per_arm": 2,
+  "chb_connection": "star"
+}
