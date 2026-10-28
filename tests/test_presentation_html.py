@@ -15,13 +15,21 @@ class Tags(HTMLParser):
     def __init__(self) -> None:
         super().__init__()
         self.ids: list[str] = []
+        self.template_depth = 0
         self.tags: list[tuple[str, dict[str, str | None]]] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         data = dict(attrs)
+        if tag == "template":
+            self.template_depth += 1
         self.tags.append((tag, data))
-        if data.get("id"):
+        # SVG IDs inside inert HTML templates are isolated until one is cloned.
+        if data.get("id") and (self.template_depth == 0 or tag == "template"):
             self.ids.append(data["id"])
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag == "template":
+            self.template_depth -= 1
 
 
 def test_single_html_has_all_fifteen_scenes():
