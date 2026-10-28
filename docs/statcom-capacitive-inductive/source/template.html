@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="description" content="Standalone, offline four-step STATCOM lesson with a synchronized interactive circuit, phasors, and fundamental waveforms.">
+<title>Understanding STATCOM · Capacitive &amp; Inductive Operation</title>
+<style>
+/* INLINE_STYLES */
+</style>
+</head>
+<body>
+<div class="app-shell">
+<header class="masthead">
+  <div class="brand" aria-label="FACTS engineering learning note"><span class="brand-block">FACTS<span class="brand-dot">.</span></span><span class="brand-copy"><b>STATCOM</b><small>Power electronics · Learning note 05</small></span></div>
+  <div class="masthead-right"><span class="independent">Independent educational material</span><button class="top-action" id="btn-fullscreen" type="button" title="Toggle fullscreen">⛶ <span>Fullscreen</span></button></div>
+</header>
+<nav class="lesson-nav" aria-label="Lesson sections">
+  <button class="nav-step active" data-section="0" aria-current="step"><span class="nav-num">01</span><span>Equivalent circuit</span></button>
+  <button class="nav-step" data-section="1"><span class="nav-num">02</span><span>Capacitive mode</span></button>
+  <button class="nav-step" data-section="2"><span class="nav-num">03</span><span>Inductive mode</span></button>
+  <button class="nav-step" data-section="3"><span class="nav-num">04</span><span>Transition</span></button>
+  <button class="nav-step lab-nav" data-section="4"><span class="nav-num">LAB</span><span>Interactive laboratory</span><span class="lab-star">✦</span></button>
+</nav>
+<main class="main" id="content">
+<!-- SECTION 1 -->
+<section class="lesson-section active" data-section="0" aria-labelledby="title-step1">
+  <div class="section-head"><div><p class="eyebrow">STEP 01 / FUNDAMENTAL IDEA</p><h1 id="title-step1">Two voltages. One reactor. One current.</h1><p class="question">Why does a difference between converter and grid voltage create reactive current?</p></div><span class="step-icon">01</span></div>
+  <div class="two-cols large-left">
+    <article class="surface circuit-intro"><div class="surface-title"><span>Equivalent circuit · fundamental-frequency model</span><span class="muted-tag">Balanced · ideal</span></div><svg class="intro-circuit" viewBox="0 0 670 390" role="img" aria-label="Equivalent circuit with converter fundamental source E on the left, coupling inductor X in series, and PCC source V on the right sharing the ground return">
+      <defs><marker id="ref-arrow-step" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="#16877c"/></marker></defs>
+      <g class="intro-wire"><path d="M128 112 H260 M400 112 H548 V194 M128 112 V194 M128 274 V316 H548 V274" /></g>
+      <path class="intro-coil" d="M260 112 Q274 72 288 112 Q302 72 316 112 Q330 72 344 112 Q358 72 372 112 Q386 72 400 112" />
+      <circle cx="128" cy="234" r="40" class="source-disc"/><circle cx="548" cy="234" r="40" class="source-disc"/>
+      <path class="intro-sine" d="M103 234 C111 209 119 209 128 234 S145 259 153 234 M523 234 C531 209 539 209 548 234 S565 259 573 234"/>
+      <circle class="elect-node" cx="128" cy="112" r="5"/><circle class="elect-node" cx="548" cy="112" r="5"/>
+      <path d="M338 142 H432" class="intro-current" marker-end="url(#ref-arrow-step)"/>
+      <text class="svg-body" x="380" y="162" text-anchor="middle">Reference current → PCC</text>
+      <text class="svg-label" x="328" y="50" text-anchor="middle">Coupling reactor</text>
+      <text class="svg-math" x="329" y="80" text-anchor="middle">X &gt; 0</text>
+      <text class="svg-label" x="128" y="353" text-anchor="middle">Converter voltage</text>
+      <text class="svg-label" x="548" y="353" text-anchor="middle">PCC / grid voltage</text>
+      <text class="svg-math" x="69" y="235" text-anchor="middle">E</text><text class="svg-math" x="606" y="235" text-anchor="middle">V</text>
+      <text class="svg-body" x="340" y="303" text-anchor="middle">Common reference / return</text>
+    </svg><p class="figure-note">The left source is the <em>fundamental AC voltage equivalent</em> of the VSC—not the DC capacitor voltage or instantaneous PWM waveform.</p></article>
+    <div class="explain-column">
+      <article class="surface lesson-body"><div class="mini-eyebrow">Observe the cause</div><p>A STATCOM produces an AC voltage <span class="var">E</span>. The PCC has an AC voltage <span class="var">V</span>. Their <b>phasor difference</b> appears across the coupling reactance <span class="var">X</span>.</p>
+        <div class="formula"><math display="block"><mrow><msub><mover><mi>I</mi><mo>¯</mo></mover><mtext>inj</mtext></msub><mo>=</mo><mfrac><mrow><mover><mi>E</mi><mo>¯</mo></mover><mo>−</mo><mover><mi>V</mi><mo>¯</mo></mover></mrow><mrow><mi>j</mi><mi>X</mi></mrow></mfrac></mrow></math></div>
+        <p>Dividing by <span class="var">j</span> rotates the voltage-difference phasor by <b>−90°</b>. That rotation explains the reactive character of the current.</p></article>
+      <div class="three-signs"><div><strong><span class="var">E</span> &gt; <span class="var">V</span></strong><span class="mode-cap">Capacitive</span></div><div><strong><span class="var">E</span> = <span class="var">V</span></strong><span>Zero exchange</span></div><div><strong><span class="var">E</span> &lt; <span class="var">V</span></strong><span class="mode-ind">Inductive</span></div></div>
+      <p class="key-point"><span class="key-mark">KEY IDEA</span> Changing the converter's fundamental voltage changes the current through the reactor.</p>
+    </div>
+  </div>
+  <div class="action-strip"><p><b>Check your intuition:</b> If <span class="var">E</span> and <span class="var">V</span> are identical phasors, what voltage remains across the reactor?</p><button class="next-inline" data-next="1">Explore capacitive mode <span aria-hidden="true">→</span></button></div>
+</section>
+<!-- SECTION 2 -->
+<section class="lesson-section" data-section="1" aria-labelledby="title-step2" hidden>
+  <div class="section-head"><div><p class="eyebrow">STEP 02 / INJECTION</p><h1 id="title-step2">Higher converter voltage → capacitive support</h1><p class="question">Why does the STATCOM supply reactive power when <span class="var">E</span> is greater than <span class="var">V</span>?</p></div><span class="mode-pill capacitive">CAPACITIVE · Q &gt; 0</span></div>
+  <div class="case-banner"><div><small>CONVERTER</small><strong><span class="var">E</span> = 1.10 <span class="unit">pu</span></strong></div><div><small>PCC</small><strong><span class="var">V</span> = 1.00 <span class="unit">pu</span></strong></div><div><small>REACTANCE</small><strong><span class="var">X</span> = 0.20 <span class="unit">pu</span></strong></div><div><small>REACTIVE POWER</small><strong class="good"><span class="var">Q</span><sub>inj</sub> = +0.50 <span class="unit">pu</span></strong></div></div>
+  <div class="two-figures"><figure class="surface teaching-figure"><figcaption>01 <b>Watch the phasors</b><span>Injected current points down (−90°).</span></figcaption><img src="__ASSET_PHASOR_CAPACITIVE__" alt="Original capacitive phasor diagram, E longer than V and injected current along negative imaginary axis" loading="lazy"></figure><figure class="surface teaching-figure"><figcaption>02 <b>Watch the waveforms</b><span>Current is shifted −90° from PCC voltage.</span></figcaption><img src="__ASSET_WAVEFORMS_CAPACITIVE__" alt="Original fundamental waveforms in capacitive operation with converter voltage amplitude above PCC voltage" loading="lazy"></figure></div>
+  <div class="interpretation"><div class="explain-flow"><b>Higher <span class="var">E</span></b><span>→</span><b>Positive <span class="var">E</span> − <span class="var">V</span></b><span>→</span><b>Downward <span class="var">I</span><sub>inj</sub> phasor</b><span>→</span><b class="good">Reactive support</b></div><p><b>Current reference matters:</b> these figures define injected current <em>from converter to PCC</em>. Its −90° angle is correct for this reference. Reversing the current reference also reverses the current phasor.</p></div>
+</section>
+<!-- SECTION 3 -->
+<section class="lesson-section" data-section="2" aria-labelledby="title-step3" hidden>
+  <div class="section-head"><div><p class="eyebrow">STEP 03 / ABSORPTION</p><h1 id="title-step3">Lower converter voltage → inductive absorption</h1><p class="question">What changes if the converter's fundamental voltage falls below the PCC voltage?</p></div><span class="mode-pill inductive">INDUCTIVE · Q &lt; 0</span></div>
+  <div class="case-banner"><div><small>CONVERTER</small><strong><span class="var">E</span> = 0.90 <span class="unit">pu</span></strong></div><div><small>PCC</small><strong><span class="var">V</span> = 1.00 <span class="unit">pu</span></strong></div><div><small>REACTANCE</small><strong><span class="var">X</span> = 0.20 <span class="unit">pu</span></strong></div><div><small>REACTIVE POWER</small><strong class="bad"><span class="var">Q</span><sub>inj</sub> = −0.50 <span class="unit">pu</span></strong></div></div>
+  <div class="two-figures"><figure class="surface teaching-figure"><figcaption>01 <b>Compare the phasors</b><span>Injected current now points up (+90°).</span></figcaption><img src="__ASSET_PHASOR_INDUCTIVE__" alt="Original inductive phasor diagram, E shorter than V and injected current along positive imaginary axis" loading="lazy"></figure><figure class="surface teaching-figure"><figcaption>02 <b>Compare the waveforms</b><span>Current phase flips by 180° relative to the capacitive case.</span></figcaption><img src="__ASSET_WAVEFORMS_INDUCTIVE__" alt="Original fundamental waveforms in inductive operation with converter voltage amplitude below PCC voltage" loading="lazy"></figure></div>
+  <div class="interpretation"><div class="explain-flow"><b>Lower <span class="var">E</span></b><span>→</span><b>Negative <span class="var">E</span> − <span class="var">V</span></b><span>→</span><b>Upward <span class="var">I</span><sub>inj</sub> phasor</b><span>→</span><b class="ind-text">Reactive absorption</b></div><p><b>Only one input changed:</b> <span class="var">E</span> dropped from 1.10 to 0.90 <span class="unit">pu</span>. The PCC voltage, coupling reactance, phase angle, and current reference remain the same.</p></div>
+</section>
+<!-- SECTION 4 -->
+<section class="lesson-section" data-section="3" aria-labelledby="title-step4" hidden>
+  <div class="section-head"><div><p class="eyebrow">STEP 04 / CONNECT THE MODES</p><h1 id="title-step4">Reactive power varies continuously with <span class="var">E</span></h1><p class="question">What happens when <span class="var">E</span> passes smoothly through the PCC voltage?</p></div><span class="step-icon">04</span></div>
+  <div class="formula formula-strip"><math display="block"><mrow><msub><mi>Q</mi><mtext>inj</mtext></msub><mo>=</mo><mfrac><mrow><mi>V</mi><mo>(</mo><mi>E</mi><mo>−</mo><mi>V</mi><mo>)</mo></mrow><mi>X</mi></mfrac><mspace width="1em"/><mo>,</mo><mspace width="1em"/><msub><mi>I</mi><mtext>cap</mtext></msub><mo>=</mo><mfrac><mrow><mi>E</mi><mo>−</mo><mi>V</mi></mrow><mi>X</mi></mfrac></mrow></math><span>For <span class="var">δ</span> = 0°, no losses, and constant <span class="var">V</span> and <span class="var">X</span>.</span></div>
+  <div class="two-figures transition-figures"><figure class="surface teaching-figure"><figcaption><b>Reactive power versus converter voltage</b><span>Follow the sign of Q.</span></figcaption><img src="__ASSET_REACTIVE_POWER_VS_E__" alt="Original graph of reactive power versus converter voltage, with zero crossing at E equals V and out of rating segments dashed" loading="lazy"></figure><figure class="surface teaching-figure"><figcaption><b>Reactive current versus converter voltage</b><span>Follow the reversal of current.</span></figcaption><img src="__ASSET_REACTIVE_CURRENT_VS_E__" alt="Original graph of reactive current versus converter voltage and converter current rating" loading="lazy"></figure></div>
+  <div class="three-signs transition-meaning"><div><strong>0.90 <span class="unit">pu</span></strong><span class="mode-ind">−0.50 pu · absorbs Q</span></div><div><strong>1.00 <span class="unit">pu</span></strong><span>0.00 pu · no exchange</span></div><div><strong>1.10 <span class="unit">pu</span></strong><span class="mode-cap">+0.50 pu · supplies Q</span></div></div>
+  <p class="figure-note wide-note">Solid curve = within the chosen current rating. Dashed = ideal equation would request more current than the converter is allowed to supply; the point is <b>not</b> a feasible operating command. The reactive current scalar <span class="var">I</span><sub>cap</sub> equals −Im(<span class="var">I</span><sub>inj</sub>).</p>
+</section>
+<!-- LAB -->
+<section class="lesson-section lab-section" data-section="4" aria-labelledby="title-lab" hidden>
+  <div class="section-head lab-head"><div><p class="eyebrow">INTERACTIVE LABORATORY / ONE CONTROL · THREE VIEWS</p><h1 id="title-lab">Move <span class="var">E</span>. Watch the current reverse.</h1><p class="question">Keep the PCC voltage and reactance fixed. Change only the converter's fundamental voltage.</p></div><div class="lab-head-right"><span id="mode-indicator" class="mode-pill capacitive" role="status">CAPACITIVE SUPPORT</span></div></div>
+  <div class="lab-toolbar surface"><div class="primary-slider"><label for="slider-E"><b>Converter fundamental voltage</b> <span class="var">E</span> <span class="slider-readout"><output id="out-E">1.100</output> <span class="unit">pu</span></span></label><input id="slider-E" type="range" min="0.75" max="1.25" step="0.001" value="1.10" aria-label="Converter fundamental voltage E in pu"><div class="slider-ranges"><span>0.75 pu</span><span>Pass through <span class="var">E</span> = <span class="var">V</span></span><span>1.25 pu</span></div></div>
+  <div class="toolbar-side"><div class="preset-group" role="group" aria-label="Operating case presets"><button type="button" data-preset="ind">Inductive</button><button type="button" data-preset="zero">Neutral</button><button type="button" data-preset="cap" class="selected">Capacitive</button></div><button id="btn-reset" class="reset-button" type="button">↺ Reset</button></div></div>
+  <div class="lab-metrics" aria-label="Calculated operating point"><div><small>Injected reactive power</small><strong id="metric-Q">+0.500 <span class="unit">pu</span></strong></div><div><small>Injected current magnitude</small><strong id="metric-I">0.500 <span class="unit">pu</span></strong></div><div><small>Injected current phasor</small><strong id="metric-Iph">−j0.500 <span class="unit">pu</span></strong></div><div><small>Converter rating</small><strong id="metric-rating">Within limit</strong></div></div>
+  <div class="lab-triptych">
+    <article class="surface lab-card"><div class="card-heading"><b>01 · Equivalent circuit</b><span id="circuit-caption">E &gt; V · capacitive</span></div><svg id="lab-circuit" class="live-svg" viewBox="0 0 500 308" role="img" aria-label="Interactive equivalent circuit"></svg></article>
+    <article class="surface lab-card"><div class="card-heading"><b>02 · Phasor diagram</b><span id="phasor-caption">I<sub>inj</sub> = −j0.50 pu</span></div><svg id="lab-phasors" class="live-svg" viewBox="0 0 500 308" role="img" aria-label="Interactive voltage and injected current phasors"></svg></article>
+    <article class="surface lab-card"><div class="card-heading"><b>03 · Fundamental waveforms</b><span>One electrical cycle · not PWM</span></div><svg id="lab-waveforms" class="live-svg" viewBox="0 0 500 308" role="img" aria-label="Interactive fundamental converter and PCC voltages and current waveforms"></svg></article>
+  </div>
+  <div class="lab-bottom"><div class="surface trace-card"><div class="trace-header"><b><span class="var">Q</span><sub>inj</sub> versus <span class="var">E</span></b><span>Solid: within current limit · dashed: outside</span></div><svg id="lab-q-curve" class="trend-svg" viewBox="0 0 590 226" role="img" aria-label="Interactive reactive power versus converter voltage"></svg></div><div class="surface trace-card"><div class="trace-header"><b><span class="var">I</span><sub>cap</sub> versus <span class="var">E</span></b><span>Current sign: + capacitive, − inductive</span></div><svg id="lab-i-curve" class="trend-svg" viewBox="0 0 590 226" role="img" aria-label="Interactive capacitive current versus converter voltage"></svg></div></div>
+  <div class="lab-controls-secondary"><div class="cursor-wrap"><button id="btn-play" type="button" class="run-button" aria-label="Animate electrical angle">▶ Animate</button><label for="slider-theta">Instantaneous phase <span class="var">θ</span></label><input id="slider-theta" type="range" min="0" max="360" step="1" value="45"><output id="out-theta">45°</output></div><details id="advanced"><summary>Advanced: <span class="var">V</span>, <span class="var">X</span>, and current rating</summary><div class="advanced-grid"><label>Grid voltage <span class="var">V</span><input id="slider-V" type="range" min="0.85" max="1.15" step="0.001" value="1.0"><output id="out-V">1.000 pu</output></label><label>Coupling reactance <span class="var">X</span><input id="slider-X" type="range" min="0.10" max="0.40" step="0.001" value="0.20"><output id="out-X">0.200 pu</output></label><label>Current limit <span class="var">I</span><sub>max</sub><input id="slider-Imax" type="range" min="0.5" max="1.5" step="0.01" value="1.0"><output id="out-Imax">1.00 pu</output></label></div></details></div>
+  <div class="lab-note" id="rating-note">This is a lossless fundamental model with <span class="var">δ</span> = 0°. Positive reactive power means injection into the PCC. Current reference: converter → grid.</div>
+</section>
+</main>
+<footer class="app-footer"><button id="previous" type="button">← Previous</button><span class="footer-message" id="footer-caption">STEP 01 / 04 — Equivalent circuit</span><div class="footer-progress" aria-hidden="true"><span id="progress-meter" style="width:20%"></span></div><span class="footer-counter" id="footer-count">1 / 5</span><button id="next" type="button">Next →</button></footer>
+</div>
+<script>
+/* INLINE_MODEL */
+</script>
+<script>
+/* INLINE_FIGURES */
+</script>
+<script>
+/* INLINE_APP */
+</script>
+</body>
+</html>

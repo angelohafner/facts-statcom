@@ -157,3 +157,16 @@ The CI workflow also runs the tests and batch SVG generation on Python 3.10, 3.1
 - [three-phase-scr-rectifier-visualizer](https://github.com/angelohafner/three-phase-scr-rectifier-visualizer) — SCR rectifier / LCC representations and SVG editing conventions.
 
 There are no repository-relative runtime dependencies; the packages can be installed independently.
+
+
+## Capacitive and inductive operation — focused lesson
+
+The four-step [illustrated teaching note](docs/statcom-capacitive-inductive-lesson.md)
+explains why the STATCOM supplies or absorbs reactive power by changing its
+fundamental converter voltage. The companion [single-file offline HTML lesson](docs/statcom-capacitive-inductive/index.html)
+provides one primary converter-voltage slider with a synchronized equivalent
+circuit, phasor diagram, fundamental waveforms and Q(E)/I(E) curves.
+
+Run `python docs/statcom-capacitive-inductive/source/build.py` to reproduce the
+standalone HTML; the original 13 operating figures and equipment drawing engine
+are unchanged.
