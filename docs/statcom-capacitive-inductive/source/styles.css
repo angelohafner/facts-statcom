@@ -31,3 +31,192 @@ button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid
 
 /* Consistent phasor overlines avoid browser-dependent placement of MathML macrons. */
 .formula math mi.phasor{text-decoration-line:overline;text-decoration-thickness:1.2px;text-decoration-color:currentColor;text-underline-offset:1px}
+
+
+
+/* Engineering document design system (Siemens-inspired, independently authored).
+   Colors are deliberately not official corporate design assets. */
+:root {
+ --ui-font: "Inter", "Segoe UI", Arial, Helvetica, sans-serif;
+ --math-font: Georgia, "Cambria", "Times New Roman", serif;
+ --math-inline-font: "Segoe UI", Arial, Helvetica, sans-serif;
+ --navy:#123547; --deep:#092639; --blue:#176F98;
+ --teal:#087D82; --amber:#BD7532; --text:#203947;
+ --muted:#627989; --line:#DAE3E7; --card:#FFFFFF;
+ --shadow:0 1px 2px rgba(12,42,59,.025);
+}
+html { background:#eef2f4; }
+body { color:var(--text); background:#eef2f4; font-family:var(--ui-font); }
+.app-shell { max-width:1780px; background:#F5F7F8; box-shadow:none; border-left:1px solid #DDE5E8; border-right:1px solid #DDE5E8; }
+.masthead {height:83px; border-top:5px solid #123547; border-bottom:1px solid #CDDDE2; padding:0 clamp(18px,3vw,48px); background:#FFFFFF; gap:20px; }
+.brand {gap:16px}
+.brand-block {font-size:28px; font-weight:800; letter-spacing:-.045em; color:#0C3349; }
+.brand-dot {color:#087D82}
+.brand-copy {border-left:2px solid #087D82; padding-left:17px; gap:5px; }
+.brand-copy b {font-size:13px; letter-spacing:.095em; color:#23485A; font-weight:750; }
+.brand-copy small {font-size:10px; color:#667D8B; letter-spacing:.045em; }
+.independent {font-size:10px; letter-spacing:.065em; color:#82929B; text-transform:uppercase; }
+.top-action {border-radius:4px; font-size:12px; background:#F8FAFB; border-color:#CCDDE3; color:#164358; }
+.top-action:hover {background:#EEF6F7; border-color:#97BFC3;}
+.lesson-nav {padding:0 clamp(18px,3vw,48px); background:#FAFBFC; border-bottom:1px solid #DCE5E9; gap:0;}
+.nav-step {min-height:57px; padding:13px 10px 12px; min-width:145px; border-radius:0; border-bottom-width:3px; font-size:12px; font-weight:670; color:#586F7D; gap:10px;}
+.nav-step:not(:last-child) {border-right:1px solid #E8EDEF;}
+.nav-step.active {background:#EAF3F4; color:#0B616B; border-bottom-color:#087D82;}
+.nav-step:hover {background:#F0F6F7; color:#16485A;}
+.nav-num {font-size:11px; font-weight:800; color:#748998;}
+.nav-step.active .nav-num {color:#087D82;}
+.lab-star {color:#087D82;}
+.main {padding:clamp(22px,2.1vw,36px) clamp(18px,3vw,48px) 16px; background:#F5F7F8; }
+.section-head {margin-bottom:22px; border-left:4px solid #087D82; padding-left:18px; min-height:64px;}
+.section-head h1 {font-weight:730; font-size:clamp(26px,2.3vw,38px); line-height:1.15; letter-spacing:-.035em; color:#0D3146; }
+.section-head .question {font-size:clamp(13px,1.02vw,16px); line-height:1.5; color:#5B7280;}
+.eyebrow {font-size:10px; font-weight:800; color:#087D82; letter-spacing:.16em; margin-bottom:9px;}
+.step-icon {border-radius:4px; background:#E6F0F2; border:1px solid #C6DFE3; color:#0C6771; font-weight:800; }
+.surface {border-radius:5px; border:1px solid #D5E1E5; background:#FFFFFF; box-shadow:0 1px 1px rgba(12,42,59,.025);}
+.surface-title, .card-heading, .trace-header {background:#FBFCFD;}
+.surface-title {padding:17px 21px 14px; font-size:13px; border-bottom:1px solid #E5ECEF; color:#1A4659;}
+.muted-tag {border:1px solid #DDE9EC; border-radius:3px; background:#F1F6F7; color:#65808B; padding:5px 9px;}
+.lesson-body {padding:22px 26px;}
+.lesson-body p {font-size:15px; color:#405868; line-height:1.66;}
+.mini-eyebrow {color:#087D82; font-size:11px; letter-spacing:.10em;}
+.figure-note {font-size:12px; color:#657C8B; line-height:1.6; padding:0 20px 16px;}
+.formula {background:#F2F7F8; border:1px solid #DCE9EB; border-left:4px solid #087D82; border-radius:3px; color:#10394A; padding:13px 16px;}
+.formula svg.equation-art {display:block; margin:0 auto; overflow:visible; shape-rendering:geometricPrecision;}
+.formula svg.equation-art--main {width:min(100%,295px); height:auto; max-height:104px; }
+.formula svg.equation-art--pair {width:min(100%,660px); height:auto; max-height:124px;}
+.formula-strip {padding:12px 20px; gap:18px;}
+.formula-strip > span {font-size:12px; color:#617988; max-width:325px; line-height:1.55;}
+.var {font-family:var(--math-inline-font); font-weight:inherit; font-style:italic; font-synthesis:style;}
+.unit, sub, .svg-numeric {font-style:normal; font-family:var(--ui-font); font-variant-numeric:lining-nums tabular-nums;}
+sub {font-size:.66em; font-weight:550; vertical-align:-.30em; line-height:0;}
+.section-head h1 .var, .lab-head h1 .var {font-size:.99em; font-family:inherit; font-style:italic; font-weight:inherit;}
+.three-signs>div {border-radius:4px; background:#FBFCFD; min-height:82px;}
+.three-signs strong {font-size:18px; color:#133F53;}
+.three-signs > div > span {font-size:12px;}
+.key-point {border-radius:3px; padding:14px 16px; border-color:#CBE2E5; background:#EEF6F6; color:#255562; font-size:14px;}
+.key-mark {color:#087D82;}
+.action-strip {padding:16px 3px;}
+.next-inline {border-radius:3px; background:#12676F; font-weight:700;}
+.mode-pill {border-radius:3px; font-size:11px; letter-spacing:.045em; font-weight:750; padding:10px 15px;}
+.mode-pill.capacitive {background:#E7F4F1; color:#097A72; border-color:#C6E4DA;}
+.mode-pill.inductive {background:#FFF3E7; color:#A15F27; border-color:#ECD6BD;}
+.mode-pill.neutral {background:#EFF3F5; color:#56737E; border-color:#D7E2E7;}
+.case-banner {border-radius:4px; background:#D6E4E8; border-color:#D2E0E4;}
+.case-banner > div {padding:16px 20px;}
+.case-banner small {font-size:10px; letter-spacing:.075em; color:#617987;}
+.case-banner strong {font-size:21px; letter-spacing:-.02em; color:#103B4F;}
+.teaching-figure figcaption {padding:15px 18px; background:#FCFDFD; border-bottom:1px solid #E3EBEE; color:#6D808B; font-size:12px;}
+.teaching-figure figcaption b {color:#1B485C; font-size:14px;}
+.teaching-figure figcaption span {font-size:11px; color:#67818E;}
+.teaching-figure img {padding:11px;}
+.interpretation {border-radius:4px; border-left:3px solid #087D82; background:#fff; padding:18px 21px;}
+.explain-flow b {font-size:14px;}
+.explain-flow span {color:#99AEB8;}
+.interpretation p {font-size:13px; color:#526F7D;}
+/* Laboratory hierarchy: one primary control, consistent live panels. */
+.lab-section .section-head {margin-bottom:16px;}
+.lab-head h1 {font-size:clamp(27px,2.35vw,38px);}
+.lab-toolbar {padding:18px 22px; gap:28px; border-top:3px solid #087D82; margin-bottom:12px;}
+.primary-slider {max-width:760px;}
+.primary-slider label {font-size:15px; font-weight:650; color:#1D4C60; margin-bottom:10px; gap:9px;}
+.primary-slider label .var {font-size:17px;}
+.slider-readout {font-size:24px; font-weight:750; color:#0A6F76;}
+.primary-slider input, .cursor-wrap input, .advanced-grid input {accent-color:#087D82;}
+.slider-ranges {font-size:10.5px; margin-top:7px; color:#738997;}
+.preset-group {border-radius:4px; background:#F1F5F7; padding:3px;}
+.preset-group button {border-radius:2px; font-size:11px; padding:10px 12px;}
+.preset-group button.selected {background:#096F77;}
+.reset-button,.run-button {border-radius:3px; font-size:12px; padding:10px 13px;}
+.lab-metrics {gap:9px; margin-bottom:12px;}
+.lab-metrics>div {display:flex; flex-direction:column; align-items:flex-start; justify-content:center; min-height:80px; gap:7px; padding:13px 16px; border-radius:4px; border-top:2px solid #DCE7EA;}
+.lab-metrics>div:first-child {border-top-color:#087D82;}
+.lab-metrics small {font-size:11px; font-weight:550; color:#657E8B;}
+.lab-metrics strong {font-size:21px; letter-spacing:-.02em; font-weight:720; line-height:1.2; color:#153C50; white-space:normal;}
+.lab-metrics .unit {font-size:13px;}
+.lab-triptych, .lab-bottom {gap:11px;}
+.card-heading {padding:14px 15px; min-height:52px; border-bottom:1px solid #E4ECEF;}
+.card-heading b {font-size:13.5px; font-weight:750; color:#174153;}
+.card-heading > span {font-size:11px; color:#6B808B;}
+.live-svg {background:#FFFFFF;}
+.trace-header {padding:12px 14px 4px; border-bottom:1px solid #EDF1F3;}
+.trace-header b {font-size:13px; color:#16475A;}
+.trace-header > span {font-size:10.5px; color:#6F8490;}
+.lab-controls-secondary {margin-top:12px;}
+.lab-controls-secondary details {border-radius:3px;}
+.lab-controls-secondary summary {font-size:12px;}
+.lab-note {font-size:11px; margin-top:12px; color:#647C8B;}
+.app-footer {min-height:63px; padding:10px clamp(18px,3vw,48px); border-top:1px solid #CDDDE2; background:#FFFFFF;}
+.app-footer button {border-radius:3px; font-size:12px; padding:10px 15px;}
+.app-footer button#next {background:#096B73; border-color:#096B73;}
+.footer-message {font-size:10px; letter-spacing:.045em;}
+.footer-progress {height:4px; border-radius:0; background:#E6ECEF;}
+.footer-progress span {background:#087D82;}
+.footer-counter {font-size:12px; color:#5E7585;}
+/* Math labels in SVG use a single sans-serif system, with italic variables. */
+.svg-txt, .svg-label, .svg-body, .svg-upright, .svg-numeric, .math-svg-label {font-family:var(--math-inline-font);}
+.svg-label {fill:#34566A; font-size:16px;}
+.svg-body {fill:#667E8B; font-size:13px;}
+.svg-math, .math-svg-label {font-style:normal; font-weight:450; fill:#173E51; font-size:17px; font-variant-numeric:lining-nums tabular-nums;}
+.math-svg-label tspan[data-math-role="var"] {font-family:var(--math-inline-font); font-style:italic; font-weight:520;}
+.math-svg-label tspan[data-math-role="sub"] {font-style:normal; font-size:74%; font-weight:500;}
+.math-svg-label tspan[data-math-role="roman"] {font-style:normal; font-variant-numeric:tabular-nums;}
+.math-svg-label tspan[data-math-role="prose"] {font-family:var(--ui-font); font-style:normal;}
+.svg-txt.math-svg-label {font-size:18px;}
+.svg-small.math-svg-label {font-size:14px;}
+.svg-legend.math-svg-label {font-size:15px; fill:#2B5265;}
+.svg-small {font-size:13px; fill:#718897;}
+.mode-qualifier {font-size:11px; fill:#718897; letter-spacing:.018em;}
+.svg-line {stroke:#3F6478;}
+.svg-grid {stroke:#E6EDF0;}
+.svg-v {stroke:var(--blue);}
+.svg-e {stroke:var(--amber);}
+.svg-i {stroke:var(--teal);}
+.intro-coil {stroke:var(--blue);}
+.intro-current {stroke:var(--teal);}
+.source-disc,.intro-sine {stroke:var(--blue);}
+/* A strong visual hierarchy must survive compact screens. */
+@media (max-width:1100px) {
+ .lab-toolbar .primary-slider {max-width:none; min-width:250px;}
+ .lab-metrics>div {display:flex;}
+ .lab-metrics strong {font-size:19px;}
+ .card-heading {display:flex; flex-wrap:wrap;}
+ .card-heading > span {display:inline; margin-top:0; white-space:normal;}
+}
+@media (max-width:760px) {
+ .masthead {height:74px; padding:0 15px;}
+ .brand-block {font-size:22px;}
+ .brand-copy {padding-left:10px;}
+ .brand-copy b {font-size:11px;}
+ .independent {display:none;}
+ .lesson-nav {padding:0 8px;}
+ .nav-step {min-width:125px; min-height:55px;}
+ .main {padding:18px 13px;}
+ .section-head {padding-left:11px;}
+ .section-head h1 {font-size:25px;}
+ .formula svg.equation-art--main {max-width:100%;width:255px;}
+ .formula svg.equation-art--pair {width:100%;}
+ .formula-strip > span {max-width:none; margin-top:8px;}
+ .lab-metrics>div {min-height:72px; padding:11px;}
+ .lab-metrics strong {font-size:18px;}
+ .lab-triptych {grid-template-columns:1fr;}
+ .lab-bottom {grid-template-columns:1fr;}
+ .lab-toolbar {padding:15px;}
+ .primary-slider label {font-size:13px;}
+ .slider-readout {font-size:21px;}
+ .lesson-body {padding:18px;}
+ .teaching-figure figcaption {flex-wrap:wrap;}
+ .teaching-figure figcaption span {max-width:none; text-align:left; margin-left:0;}
+}
+@media (max-width:520px) {
+ .masthead {gap:5px;}
+ .brand {gap:7px; flex:1; min-width:0; white-space:normal;}
+ .brand-block {font-size:20px; flex-shrink:0;}
+ .brand-copy {padding-left:8px; min-width:0; flex:1;}
+ .brand-copy b {font-size:9px; letter-spacing:.055em; white-space:nowrap;}
+ .brand-copy small {font-size:9px; letter-spacing:0; white-space:normal;}
+ .masthead-right {flex:0 0 auto;}
+ .top-action {padding:8px;}
+}
+@media (prefers-reduced-motion:reduce) { .lesson-section{animation:none;} }
+@media print {.main{background:#fff;}.app-shell{border:0;} .surface{break-inside:avoid;}}
+

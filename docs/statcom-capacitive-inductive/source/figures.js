@@ -1,7 +1,7 @@
 /* Synchronized SVG renderers. The electrical model is imported from model.js, not from any circuit renderer. */
 'use strict';
 const STATCOMViews = (() => {
-  const COLOR=Object.freeze({blue:'#187cac',teal:'#088878',amber:'#b9762e',navy:'#173f55',muted:'#768d9a',grid:'#e7eef1',outside:'#8295a2'});
+  const COLOR=Object.freeze({blue:'#176F98',teal:'#087D82',amber:'#BD7532',navy:'#123547',muted:'#6B8390',grid:'#E6EDF0',outside:'#9AAEB9'});
   const pnt=(x,y)=>`${x.toFixed(2)},${y.toFixed(2)}`;
   const f=(x,d=3)=>STATCOMPhysics.numeric(x,d);
   const signed=(x,d=3)=>STATCOMPhysics.numeric(x,d,true);
@@ -11,7 +11,7 @@ const STATCOMViews = (() => {
     let precedingSubscript=false;
     const spans=tokens.map(([value,kind])=>{
       if(!['var','roman','sub','prose'].includes(kind))throw Error(`Unknown math label role: ${kind}`);
-      const vertical=kind==='sub'?' dy="3" font-size="70%"':precedingSubscript?' dy="-3"':'';
+      const vertical=kind==='sub'?' dy="3.5" font-size="74%"':precedingSubscript?' dy="-3.5"':'';
       precedingSubscript=kind==='sub';
       return `<tspan data-math-role="${kind}" font-style="${kind==='var'?'italic':'normal'}"${vertical}>${value}</tspan>`;
     }).join('');
@@ -139,3 +139,4 @@ const STATCOMViews = (() => {
   }
   return Object.freeze({circuit,phasors,waveforms,trend});
 })();
+
