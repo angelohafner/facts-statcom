@@ -47,7 +47,9 @@ def test_offline_html_has_five_navigation_sections_and_one_master_slider() -> No
     assert html.count('id="lab-i-curve"') == 1
     assert re.search(r"<script\b[^>]*\bsrc\s*=", html, re.I) is None
     assert re.search(r"<link\b[^>]*\bhref\s*=", html, re.I) is None
-    assert "https://" not in html and "http://" not in html
+    # XML namespace identifiers are URLs but do not load external resources.
+    allowed_namespaces = {"http://www.w3.org/1999/xlink", "http://www.w3.org/2000/svg"}
+    assert set(re.findall(r'https?://[^"\\s<>]+', html)).issubset(allowed_namespaces)
     assert "__ASSET_" not in html
     assert "INLINE_" not in html
 
@@ -76,10 +78,11 @@ def test_three_base_examples_agree_with_python_physics() -> None:
         assert operating.current_within_rating
 
 
-def test_lab_math_formatting_uses_mathml_and_roman_numbers() -> None:
+def test_lab_math_formatting_uses_svg_vectors_and_roman_numbers() -> None:
     html = HTML.read_text(encoding="utf-8")
-    assert '<math display="block">' in html
-    assert "math mn,.formula mtext" in html or "font-style:normal" in html
+    assert html.count('class="equation-art ') == 2
+    assert '<math display="block">' not in html
+    assert "font-variant-numeric:lining-nums" in html
     assert "function point(parameters)" in html
     assert "function waveforms(parameters, angleDegrees)" in html
     assert "STACOMPhysics" not in html
@@ -121,16 +124,16 @@ def test_javascript_and_python_phasors_are_numerically_equivalent() -> None:
 
 
 def test_scientific_typography_is_consistent_and_offline() -> None:
-    """MathML, inline math, and live SVG labels share one local font strategy."""
+    """Vector equations and SVG math labels retain their offline typographic roles."""
     styles = (PACKAGE / "source" / "styles.css").read_text(encoding="utf-8")
     figures = (PACKAGE / "source" / "figures.js").read_text(encoding="utf-8")
     template = (PACKAGE / "source" / "template.html").read_text(encoding="utf-8")
-    assert '--math-font:"STIX Two Math","STIX Math","Cambria Math"' in styles
-    assert ".formula math{font-family:var(--math-font)" in styles
-    assert '.math-svg-label{font-family:var(--math-font)' in styles
-    assert '.var{font-family:var(--math-font);font-style:italic' in styles
+    assert '--math-inline-font:' in styles
+    assert '.math-svg-label tspan[data-math-role="var"]' in styles
+    assert '.math-svg-label tspan[data-math-role="roman"]' in styles
+    assert '.math-svg-label tspan[data-math-role="sub"]' in styles
     assert 'font-style="normal"' in template
-    assert 'class="phasor"' in template
+    assert 'class="equation-art ' in template
     assert 'data-math-role="${kind}"' in figures
     assert 'baseline-shift="sub"' not in figures
     assert '.card-heading > span{' in styles
@@ -163,5 +166,5 @@ def test_live_svg_math_subscripts_keep_numerals_upright() -> None:
             if role in {"roman", "sub", "prose"}:
                 assert part.get("font-style") == "normal"
             if role == "sub":
-                assert part.get("dy") == "3"
-                assert part.get("font-size") == "70%"
+                assert part.get("dy") == "3.5"
+                assert part.get("font-size") == "74%"
