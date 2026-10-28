@@ -1,0 +1,134 @@
+<section class="slide active" id="slide-1" data-title="Introduction" aria-label="Slide 1: Introduction">
+  <div class="hero">
+    <div>
+      <div class="pill"><span class="dot"></span> AN INTERACTIVE POWER SYSTEMS LESSON</div>
+      <h1>STATCOM<span class="teal">.</span><br>Voltage to <span class="teal">VARs</span></h1>
+      <p>Understand how a voltage-source converter controls reactive current, supports PCC voltage, and responds to grid disturbances.</p>
+      <div class="hero-bullets"><span class="tag">15 VISUAL SCENES</span><span class="tag">LIVE PHASORS</span><span class="tag">100% OFFLINE</span></div>
+      <div class="inline-choice"><button class="accent" data-jump="15">Open interactive lab &nbsp;→</button><button class="soft" data-jump="2">Start from the basics</button></div>
+      <div class="hero-caption">A conceptual fundamental-frequency teaching model · Not an EMT or switching simulation</div>
+    </div>
+    <div class="card hero-art pad">
+      <div class="panel-head"><div><div class="kicker">GRID SUPPORT / ONE-LINE VIEW</div><h3 style="margin-top:8px">Control reactive power at the PCC</h3></div><span class="diagram-badge">LIVE MODEL</span></div>
+      <div class="figframe" id="hero-circuit" style="height:265px"></div>
+      <div class="small-kpis"><div class="mini-card"><div class="value">± <span>Q</span></div><div class="title">Reactive support</div></div><div class="mini-card"><div class="value">&lt; 1 pu</div><div class="title">Current is limited</div></div><div class="mini-card"><div class="value">AC ↔ DC</div><div class="title">Self-commutated VSC</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-2" data-title="Anatomy" aria-label="Slide 2: Main components">
+ <div class="sheading"><div><div class="eyebrow">02 / Physical structure</div><h1>One device. Seven essential parts.</h1><p>Pick a component to see what it does in the complete STATCOM system.</p></div><div class="slide-number">02</div></div>
+ <div style="display:grid;grid-template-columns:221px 1fr 282px;gap:16px;height:484px">
+  <div class="component-list" id="component-buttons">
+   <button class="component-pick selected" data-part="grid">01 &nbsp; AC grid</button><button class="component-pick" data-part="pcc">02 &nbsp; PCC</button><button class="component-pick" data-part="transformer">03 &nbsp; Transformer</button><button class="component-pick" data-part="reactor">04 &nbsp; Coupling reactor</button><button class="component-pick" data-part="vsc">05 &nbsp; VSC</button><button class="component-pick" data-part="capacitor">06 &nbsp; DC capacitor</button><button class="component-pick" data-part="control">07 &nbsp; Controller</button>
+  </div>
+  <div class="card pad"><div class="panel-head"><span class="panel-label">Simplified system architecture</span><span class="diagram-badge">SELECTABLE</span></div><div class="figframe" id="component-diagram" style="height:416px"></div></div>
+  <div class="card pad"><div class="kicker">COMPONENT FOCUS</div><div class="component-note" id="component-note" aria-live="polite" style="margin-top:16px"><h3>AC grid</h3><p>The network whose voltage is supported by the STATCOM through its point of common coupling.</p></div><div class="divider"></div><div class="keycard"><strong>The key idea</strong><p>The VSC behaves like a controllable fundamental AC voltage behind a coupling reactance.</p></div><div style="margin-top:23px" class="scene-note">The drawing is a functional overview, not a switch-by-switch wiring diagram.</div></div>
+ </div>
+</section>
+
+<section class="slide" id="slide-3" data-title="Inside the VSC" aria-label="Slide 3: Two-level converter">
+ <div class="sheading"><div><div class="eyebrow">03 / Power electronics</div><h1>Inside a two-level VSC</h1><p>Six controllable switches synthesize three-phase AC from a DC link.</p></div><div class="slide-number">03</div></div>
+ <div class="grida" style="height:477px">
+  <div class="card pad panel"><div class="panel-head"><span class="panel-label">Three half-bridge legs · IGBTs + antiparallel diodes</span><span class="diagram-badge">ILLUSTRATIVE GATING</span></div><div class="figframe" id="switch-diagram"></div></div>
+  <div style="display:flex;flex-direction:column;gap:12px"><div class="card pad"><h3>Choose a phase leg</h3><div class="buttons switch-tabs"><button class="soft active" data-leg="a">Phase A</button><button class="soft" data-leg="b">Phase B</button><button class="soft" data-leg="c">Phase C</button></div><div class="divider"></div><p>The upper/lower switch states are complementary in this idealized illustration.</p><div style="margin:19px 0 6px" class="metric"><div class="m-label">Selected pole voltage</div><div class="m-value" id="pole-value">+V<sub>dc</sub>/2</div></div><div class="buttons" style="margin-top:13px"><button id="switch-play" class="soft">▶ Animate</button><button id="switch-step" class="soft">Step switching</button></div></div><div class="keycard"><strong>Important distinction</strong><p>Pole switching states are not the same as the converter's fundamental RMS phasor <var>E</var>. The phasor model averages over the switching action.</p></div></div>
+ </div>
+</section>
+
+<section class="slide" id="slide-4" data-title="Equivalent circuit" aria-label="Slide 4: Equivalent model">
+ <div class="sheading"><div><div class="eyebrow">04 / Fundamental model</div><h1>Two voltages. One reactance.</h1><p>Change the converter voltage and watch the injected current and power respond.</p></div><div class="slide-number">04</div></div>
+ <div style="display:grid;grid-template-columns:330px 1fr 320px;gap:15px;height:480px">
+  <div class="card pad"><h3>Operating parameters</h3><div data-controls="primary"></div><div class="divider"></div><button class="soft" data-reset="primary">Reset voltages</button><div class="scene-note" style="margin-top:20px">The current direction is defined from the converter toward the PCC.</div></div>
+  <div class="card pad panel"><div class="panel-label">Per-phase fundamental equivalent</div><div class="figframe" id="equivalent-circuit" style="height:255px"></div><div class="formula" style="text-align:center;font-size:23px"><var>I</var><sub>inj</sub> = (<var>E</var> − <var>V</var>) / (<var>jX</var>)</div><div class="small muted" style="text-align:center">Balanced 3φ, pu values; power defined at PCC.</div></div>
+  <div style="display:flex;flex-direction:column;gap:12px"><div class="metric"><div class="m-label">Injected active power</div><div class="m-value" data-live="p"></div></div><div class="metric"><div class="m-label">Injected reactive power</div><div class="m-value" data-live="q"></div></div><div class="metric"><div class="m-label">Current magnitude</div><div class="m-value" data-live="i"></div></div><div class="mode-badge neutral" data-mode-label>CHANGE PARAMETERS TO EXPLORE</div><div class="warning" data-overlimit hidden>Current exceeds rating: mathematical point only.</div></div>
+ </div>
+</section>
+
+<section class="slide" id="slide-5" data-title="Capacitive support" aria-label="Slide 5: Capacitive operation">
+ <div class="sheading"><div><div class="eyebrow">05 / Reactive power</div><h1>Capacitive mode: inject VARs</h1><p>At zero relative angle, increasing the converter fundamental voltage makes reactive current flow toward the network.</p></div><div class="slide-number">05</div></div>
+ <div style="display:grid;grid-template-columns:1.14fr .86fr;gap:20px;height:472px">
+  <div class="card pad panel"><div class="panel-head"><span class="panel-label">Voltage and current phasors</span><span class="mode-badge cap">Q &gt; 0</span></div><div class="figframe" id="capacitive-phasor"></div></div>
+  <div style="display:flex;flex-direction:column;gap:15px"><div class="card pad"><div class="kicker">TAKE A SNAPSHOT</div><div class="formula" style="margin:17px 0">When <var>E</var> &gt; <var>V</var> and <var>δ</var> = 0:</div><div class="big teal" style="font-size:32px">Q<sub>inj</sub> &gt; 0</div><p style="margin-top:13px">The injected current phasor points at −90° relative to the PCC voltage for our converter-to-grid current direction.</p><div class="divider"></div><button class="accent" data-preset="capacitive">Set capacitive example</button></div><div class="keycard"><strong>Remember the direction</strong><p>If you define current into the STATCOM instead, its phasor sign reverses. Reactive-power convention does not change.</p></div></div>
+ </div>
+</section>
+
+<section class="slide" id="slide-6" data-title="Inductive absorption" aria-label="Slide 6: Inductive operation">
+ <div class="sheading"><div><div class="eyebrow">06 / Reactive power</div><h1>Inductive mode: absorb VARs</h1><p>Reduce the converter fundamental voltage below the PCC voltage and reactive current reverses.</p></div><div class="slide-number">06</div></div>
+ <div style="display:grid;grid-template-columns:1.14fr .86fr;gap:20px;height:472px">
+  <div class="card pad panel"><div class="panel-head"><span class="panel-label">Voltage and current phasors</span><span class="mode-badge ind">Q &lt; 0</span></div><div class="figframe" id="inductive-phasor"></div></div>
+  <div style="display:flex;flex-direction:column;gap:15px"><div class="card pad"><div class="kicker">TAKE A SNAPSHOT</div><div class="formula" style="margin:17px 0">When <var>E</var> &lt; <var>V</var> and <var>δ</var> = 0:</div><div class="big amber" style="font-size:32px">Q<sub>inj</sub> &lt; 0</div><p style="margin-top:13px">The injected current phasor now points at +90° relative to the PCC voltage.</p><div class="divider"></div><button class="accent" data-preset="inductive">Set inductive example</button></div><div class="keycard"><strong>Physical meaning</strong><p>At the fundamental frequency, the STATCOM behaves like a controllable reactive current sink.</p></div></div>
+ </div>
+</section>
+
+<section class="slide" id="slide-7" data-title="Reactive power law" aria-label="Slide 7: Reactive power versus converter voltage">
+ <div class="sheading"><div><div class="eyebrow">07 / Operating characteristic</div><h1>Reactive power follows converter voltage</h1><p>The current limit bounds the achievable fundamental-frequency operating range.</p></div><div class="slide-number">07</div></div>
+ <div class="gridb" style="height:470px;grid-template-columns:380px 1fr">
+  <div style="display:flex;flex-direction:column;gap:13px"><div class="card pad"><div class="kicker">THE RELATIONSHIP</div><div class="formula" style="font-size:24px;margin:23px 0"><var>Q</var><sub>inj</sub> = <span class="fraction"><span><var>VE</var></span><span><var>X</var></span></span> cos <var>δ</var> − <span class="fraction"><span><var>V</var><sup>2</sup></span><span><var>X</var></span></span></div><div data-controls="basic"></div><button class="soft" data-jump="15" style="margin-top:10px">Explore in the laboratory →</button></div><div class="keycard"><strong>Solid vs dashed</strong><p>Solid: within the configured current rating. Dashed: hypothetical points outside the rating.</p></div></div>
+  <div class="card pad panel"><div class="panel-head"><span class="panel-label">Injected reactive power versus <var>E</var></span><span class="diagram-badge">LIVE CURVE</span></div><div class="figframe" id="power-curve"></div></div>
+ </div>
+</section>
+
+<section class="slide" id="slide-8" data-title="Current limit" aria-label="Slide 8: Current and reactive power limits">
+ <div class="sheading"><div><div class="eyebrow">08 / Capability</div><h1>Nearly constant current—not constant VARs</h1><p>Available reactive power decreases approximately linearly with PCC voltage under a pure current limit.</p></div><div class="slide-number">08</div></div>
+ <div class="gridb" style="height:470px;grid-template-columns:325px 1fr">
+  <div style="display:flex;flex-direction:column;gap:14px"><div class="card pad"><div class="kicker">CURRENT RATING</div><div class="formula" style="margin:21px 0;font-size:28px">|<var>Q</var>| ≤ <var>V I</var><sub>max</sub></div><div class="control-row" style="grid-template-columns:92px 1fr 60px"><label for="lim-imax"><var>I</var><sub>max</sub></label><input id="lim-imax" type="range" data-param="imax" min="0.2" max="1.5" step="0.05"><output data-readout="imax"></output></div><div class="divider"></div><p>For an SVC dominated by fixed susceptance, the capacitive capability varies roughly as <var>V</var><sup>2</sup>. The comparison is normalized at 1 pu.</p></div><div class="keycard"><strong>Idealized envelope</strong><p>Real STATCOM capability also depends on DC voltage, modulation headroom, cooling and protection.</p></div></div>
+  <div class="card pad panel"><div class="panel-head"><span class="panel-label">Reactive power capability at reduced grid voltage</span><span class="diagram-badge">NORMALIZED</span></div><div class="figframe" id="limit-curve"></div></div>
+ </div>
+</section>
+
+<section class="slide" id="slide-9" data-title="AC waveforms" aria-label="Slide 9: Three-phase fundamental waveforms">
+ <div class="sheading"><div><div class="eyebrow">09 / Time domain</div><h1>Three phases, one operating point</h1><p>Observe the instantaneous fundamental-frequency voltages and injected currents.</p></div><div class="slide-number">09</div></div>
+ <div class="gridb" style="height:477px;grid-template-columns:340px 1fr">
+  <div style="display:flex;flex-direction:column;gap:14px"><div class="card pad"><h3>Select the operating mode</h3><div class="buttons"><button class="soft" data-preset="capacitive">Capacitive</button><button class="soft" data-preset="neutral">Q ≈ 0</button><button class="soft" data-preset="inductive">Inductive</button></div><div class="divider"></div><div class="panel-label">Fundamental frequency</div><p>Each colored trace represents a phase; their angles are separated by 120°.</p><div class="divider"></div><button class="soft" id="wave-play">▶ Move time cursor</button></div><div class="keycard"><strong>Not PWM switching</strong><p>These are balanced RMS-derived sinusoids. Switching harmonics and valve details are intentionally excluded.</p></div></div>
+  <div class="card pad panel"><div class="panel-head"><span class="panel-label">Three-phase voltage and injected current</span><span class="diagram-badge">LIVE WAVEFORMS</span></div><div class="figframe" id="waveforms-large"></div></div>
+ </div>
+</section>
+
+<section class="slide" id="slide-10" data-title="DC link energy" aria-label="Slide 10: DC-link capacitor">
+ <div class="sheading"><div><div class="eyebrow">10 / Energy storage</div><h1>The DC capacitor is not a power plant</h1><p>It buffers a finite amount of energy. Sustained active power requires an energy source.</p></div><div class="slide-number">10</div></div>
+ <div class="grid2" style="height:467px;grid-template-columns:.94fr 1.06fr">
+  <div class="card pad"><div class="kicker">CAPACITOR ENERGY</div><div class="formula" style="font-size:36px;margin:17px 0"><var>W</var><sub>dc</sub> = ½ <var>C V</var><sub>dc</sub><sup>2</sup></div><div class="control-row" style="grid-template-columns:105px 1fr 65px;margin-top:29px"><label for="cap-c"><var>C</var></label><input id="cap-c" type="range" data-param="cap" min="2" max="30" step="1"><output data-readout="cap"></output></div><div class="control-row" style="grid-template-columns:105px 1fr 65px"><label for="cap-vdc"><var>V</var><sub>dc</sub></label><input id="cap-vdc" type="range" data-param="vdc" min="1" max="5" step="0.1"><output data-readout="vdc"></output></div><div class="divider"></div><div class="stat-row"><div class="metric"><div class="m-label">Stored energy</div><div class="m-value" id="dc-energy">—</div></div><div class="metric"><div class="m-label">Energy from 10% sag</div><div class="m-value" id="dc-release">—</div></div></div></div>
+  <div class="card pad panel"><div class="panel-label">Illustrative DC energy reservoir</div><div class="figframe" id="dc-cap-diagram"></div><div class="keycard" style="padding:9px 14px"><strong>Why angle matters:</strong><p>Small active-power import replenishes converter losses and holds <var>V</var><sub>dc</sub>. The simplified phasor model does not simulate that energy balance.</p></div></div>
+ </div>
+</section>
+
+<section class="slide" id="slide-11" data-title="Control system" aria-label="Slide 11: Control loops">
+ <div class="sheading"><div><div class="eyebrow">11 / Closed-loop regulation</div><h1>From voltage error to converter command</h1><p>Select a block to trace how measurements become current references and modulation commands.</p></div><div class="slide-number">11</div></div>
+ <div class="card pad" style="height:377px"><div class="figframe control-diagram" id="control-block-diagram"></div></div>
+ <div class="row-box" style="margin-top:14px;justify-content:space-between"><div class="keycard" style="width:72%"><strong id="control-block-name">PCC voltage loop</strong><p id="control-block-note">The voltage reference and PCC measurement are compared; droop adjusts the requested reactive current.</p></div><div class="scene-note" style="width:26%">This is a functional controller diagram, not a literal vendor implementation.</div></div>
+</section>
+
+<section class="slide" id="slide-12" data-title="Dynamic voltage support" aria-label="Slide 12: Voltage response to grid events">
+ <div class="sheading"><div><div class="eyebrow">12 / Conceptual dynamics</div><h1>How the controller reacts to a disturbance</h1><p>Inject capacitive current during a sag; absorb reactive current during an overvoltage.</p></div><div class="slide-number">12</div></div>
+ <div style="display:grid;grid-template-columns:298px 1fr;gap:15px;height:474px">
+  <div style="display:flex;flex-direction:column;gap:10px"><div class="card pad"><h3>Configure the grid</h3><div class="control-row" style="grid-template-columns:86px 1fr 54px"><label for="dyn-vref"><var>V</var><sub>ref</sub></label><input id="dyn-vref" type="range" data-param="vref" min="0.95" max="1.05" step="0.005"><output data-readout="vref"></output></div><div class="control-row" style="grid-template-columns:86px 1fr 54px"><label for="dyn-droop">Droop</label><input id="dyn-droop" type="range" data-param="droop" min="0.01" max="0.1" step="0.005"><output data-readout="droop"></output></div><div class="control-row" style="grid-template-columns:86px 1fr 54px"><label for="dyn-gridx"><var>X</var><sub>th</sub></label><input id="dyn-gridx" type="range" data-param="gridX" min="0.04" max="0.25" step="0.01"><output data-readout="gridX"></output></div><div class="control-row" style="grid-template-columns:86px 1fr 54px"><label for="dyn-lim"><var>I</var><sub>max</sub></label><input id="dyn-lim" type="range" data-param="imax" min="0.2" max="1.5" step="0.05"><output data-readout="imax"></output></div><div class="divider"></div><div class="buttons"><button class="soft active" data-event="both">Sag + swell</button><button class="soft" data-event="sag">Sag only</button><button class="soft" data-event="swell">Swell only</button></div></div><div class="keycard" style="padding:13px"><strong>Averaged surrogate</strong><p>PI, droop, current saturation and low-order response lags; not calibrated EMT timings.</p></div></div>
+  <div class="card pad panel"><div class="panel-head"><span class="panel-label">Thevenin grid step → PCC voltage → reactive current</span><span class="diagram-badge">EULER INTEGRATION</span></div><div class="figframe" id="dynamic-response"></div></div>
+ </div>
+</section>
+
+<section class="slide" id="slide-13" data-title="Voltage droop" aria-label="Slide 13: Voltage droop characteristic">
+ <div class="sheading"><div><div class="eyebrow">13 / Grid regulation</div><h1>Droop makes voltage control shareable</h1><p>A sloped current–voltage characteristic avoids demanding exactly one PCC voltage at all current levels.</p></div><div class="slide-number">13</div></div>
+ <div class="gridb" style="height:474px;grid-template-columns:342px 1fr">
+  <div style="display:flex;flex-direction:column;gap:13px"><div class="card pad"><div class="formula" style="font-size:25px;margin:0 0 17px"><var>V</var><sub>PCC</sub> = <var>V</var><sub>ref</sub> − <var>k</var><sub>droop</sub> <var>I</var><sub>cap</sub></div><div class="control-row" style="grid-template-columns:92px 1fr 54px"><label for="drop-vth"><var>V</var><sub>th</sub></label><input id="drop-vth" type="range" data-param="vth" min="0.78" max="1.16" step="0.01"><output data-readout="vth"></output></div><div class="control-row" style="grid-template-columns:92px 1fr 54px"><label for="drop-d"><var>k</var><sub>droop</sub></label><input id="drop-d" type="range" data-param="droop" min="0.01" max="0.10" step="0.005"><output data-readout="droop"></output></div><div class="control-row" style="grid-template-columns:92px 1fr 54px"><label for="drop-gridx"><var>X</var><sub>th</sub></label><input id="drop-gridx" type="range" data-param="gridX" min="0.04" max="0.25" step="0.01"><output data-readout="gridX"></output></div><div class="divider"></div><p>Equilibrium current: <span class="inline-value" id="droop-current">—</span><br>Equilibrium PCC: <span class="inline-value" id="droop-vpcc">—</span></p></div><div class="keycard"><strong>Weak-grid surrogate</strong><p><var>V</var><sub>PCC</sub> = <var>V</var><sub>th</sub> + <var>X</var><sub>th</sub><var>I</var><sub>cap</sub>. A linearization, not an AC power flow.</p></div></div>
+  <div class="card pad panel"><div class="panel-head"><span class="panel-label">Voltage droop &amp; grid characteristic</span><span class="diagram-badge">LIVE INTERSECTION</span></div><div class="figframe" id="droop-chart"></div></div>
+ </div>
+</section>
+
+<section class="slide" id="slide-14" data-title="Converter technologies" aria-label="Slide 14: Different converter technologies">
+ <div class="sheading"><div><div class="eyebrow">14 / Hardware architectures</div><h1>Different converters. Same reactive-control idea.</h1><p>Inspect the actual editable diagrams generated by the <code>facts-statcom</code> Python package.</p></div><div class="slide-number">14</div></div>
+ <div class="tech-tabs" id="technology-tabs" style="margin-bottom:13px"><button data-tech="two-level" class="active">Two-level VSC</button><button data-tech="npc">3-level NPC</button><button data-tech="chb-star">CHB star</button><button data-tech="chb-delta">CHB delta</button><button data-tech="mmc">MMC double-star</button></div>
+ <div class="tech-body"><div class="tech-canvas" id="tech-canvas" aria-live="polite"></div><div class="card tech-blurb"><div class="kicker">TOPOLOGY EXPLORER</div><h3 id="tech-name">Two-level VSC</h3><div id="tech-description" class="aside-explain"></div><div class="divider"></div><div class="scene-note">These are topology illustrations, not detailed switching or harmonic simulations.</div></div></div>
+</section>
+
+<section class="slide lab-slide" id="slide-15" data-title="Interactive laboratory" aria-label="Slide 15: Interactive STATCOM laboratory">
+ <div class="sheading"><div><div class="eyebrow">15 / Interactive control room</div><h1>STATCOM laboratory <span class="teal">●</span></h1><p>One operating point, four synchronized visualizations. Change a parameter and follow its consequences.</p></div><span class="diagram-badge">ALL PANELS SYNCHRONIZED</span></div>
+ <div class="lab-metrics"><div class="metric"><div class="m-label">Reactive injection</div><div class="m-value" data-live="q"></div></div><div class="metric"><div class="m-label">Active injection</div><div class="m-value" data-live="p"></div></div><div class="metric"><div class="m-label">Injected current</div><div class="m-value" data-live="i"></div></div><div class="metric"><div class="m-label">Operating mode</div><div class="m-value" data-live="mode" style="font-size:16px;padding-top:7px"></div></div></div>
+ <div class="lab-grid">
+  <div class="card lab-controls"><h3>Live operating point</h3><div class="micro muted">Balanced 3φ · per-unit fundamental model</div><div data-controls="lab"></div><div class="divider" style="margin:9px 0"></div><div class="buttons"><button class="soft" data-preset="capacitive">+Q</button><button class="soft" data-preset="neutral">Q = 0</button><button class="soft" data-preset="inductive">−Q</button><button class="soft" data-reset="all">↺ Reset</button></div><div class="lab-status" id="lab-status" aria-live="polite">—</div><div class="divider" style="margin:9px 0"></div><div class="micro muted">Positive Q: injected into PCC. No silent current clipping.</div></div>
+  <div class="card panel"><div class="panel-head"><div><div class="panel-label">Equivalent circuit + phasors</div><div class="panel-sub">Current directed converter → PCC</div></div><span class="diagram-badge">RMS</span></div><div class="lab-circuit-phasor panel-body"><div class="figframe" id="lab-circuit"></div><div class="figframe" id="lab-phasor"></div></div></div>
+  <div class="card panel"><div class="panel-head"><div><div class="panel-label">Reactive power versus converter voltage</div><div class="panel-sub">Dashed portions are outside the current rating</div></div></div><div class="figframe panel-body" id="lab-q-curve"></div></div>
+  <div class="card panel"><div class="panel-head"><div><div class="panel-label">Three-phase instantaneous waveforms</div><div class="panel-sub">Fundamental only; no PWM harmonics</div></div></div><div class="figframe panel-body" id="lab-waveforms"></div></div>
+  <div class="card panel"><div class="panel-head"><div><div class="panel-label">Droop characteristic &amp; current limit</div><div class="panel-sub">Regulation reference independent of manual E and δ</div></div></div><div class="figframe panel-body" id="lab-droop"></div></div>
+ </div>
+ <div class="lab-footer"><span>MODEL: I = (E − V) / jX · S<sub>inj</sub> = V I* · k<sub>droop</sub> from slide 13</span><span>Conceptual / educational · NOT an EMT simulation</span></div>
+</section>
