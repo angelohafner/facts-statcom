@@ -53,6 +53,22 @@ The implementation is organized in:
 - `source/app.js`: synchronization, buttons, navigation, animation, keyboard, and accessibility.
 - `source/build.py`: self-contained HTML compilation and SVG injection.
 
+## Mathematical typography
+
+MathML equations, mathematical symbols in HTML, and live SVG chart labels use one
+consistent, offline-first mathematics font stack (STIX Two Math / STIX Math,
+with Cambria Math and other system fallbacks). Variable symbols are italic;
+all numbers, physical units and descriptive indices such as `inj` and `cap` are
+upright. Dynamic SVG subscripts are sized and positioned explicitly to avoid
+browser-dependent extra vertical spacing. Phasor overlines are native text
+decorations instead of poorly aligned macron glyphs.
+
+**No downloadable fonts or external JavaScript/CSS are included.** The exact
+letterforms can vary slightly across operating systems, depending on locally
+available fonts, while mathematical roles remain consistent. The six original
+Matplotlib SVG reference figures remain unchanged. Responsive headings use
+child-only selectors so nested mathematical symbols do not break the layout.
+
 Existing Python models and the original gallery are **not modified**.
 
 ## Validation

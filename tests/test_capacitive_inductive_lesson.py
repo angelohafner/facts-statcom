@@ -118,3 +118,50 @@ def test_javascript_and_python_phasors_are_numerically_equivalent() -> None:
             assert actual["wave"]["i"] == pytest.approx(i[0],abs=1e-12)
         else:
             assert math.isclose(actual["wave"]["i"],0,abs_tol=1e-12)
+
+
+def test_scientific_typography_is_consistent_and_offline() -> None:
+    """MathML, inline math, and live SVG labels share one local font strategy."""
+    styles = (PACKAGE / "source" / "styles.css").read_text(encoding="utf-8")
+    figures = (PACKAGE / "source" / "figures.js").read_text(encoding="utf-8")
+    template = (PACKAGE / "source" / "template.html").read_text(encoding="utf-8")
+    assert '--math-font:"STIX Two Math","STIX Math","Cambria Math"' in styles
+    assert ".formula math{font-family:var(--math-font)" in styles
+    assert '.math-svg-label{font-family:var(--math-font)' in styles
+    assert '.var{font-family:var(--math-font);font-style:italic' in styles
+    assert 'font-style="normal"' in template
+    assert 'class="phasor"' in template
+    assert 'data-math-role="${kind}"' in figures
+    assert 'baseline-shift="sub"' not in figures
+    assert '.card-heading > span{' in styles
+    assert '.trace-header > span{' in styles
+    assert 'fonts.googleapis.com' not in HTML.read_text(encoding="utf-8")
+    assert '@font-face' not in HTML.read_text(encoding="utf-8")
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="Node is optional for the Python package")
+def test_live_svg_math_subscripts_keep_numerals_upright() -> None:
+    """Validate roles and SVG syntax in the real dynamic diagram renderers."""
+    source = (PACKAGE / "source" / "model.js").read_text(encoding="utf-8")
+    source += "\n" + (PACKAGE / "source" / "figures.js").read_text(encoding="utf-8")
+    source += """
+    const p={E:1.10,V:1.00,X:0.2,Imax:1.0,theta:45};
+    const fragments=[STATCOMViews.phasors(p),STATCOMViews.waveforms(p,45),
+        STATCOMViews.trend(p,'Q'),STATCOMViews.trend(p,'I')];
+    process.stdout.write(JSON.stringify(fragments));
+    """
+    completed = subprocess.run(["node", "-e", source], capture_output=True,
+                               text=True, check=True)
+    fragments = json.loads(completed.stdout)
+    for fragment in fragments:
+        svg = ET.fromstring(f'<svg xmlns="http://www.w3.org/2000/svg">{fragment}</svg>')
+        for part in svg.iter("{http://www.w3.org/2000/svg}tspan"):
+            role = part.get("data-math-role")
+            if role == "var":
+                assert part.get("font-style") == "italic"
+                assert not re.search(r"[0-9]", part.text or "")
+            if role in {"roman", "sub", "prose"}:
+                assert part.get("font-style") == "normal"
+            if role == "sub":
+                assert part.get("dy") == "3"
+                assert part.get("font-size") == "70%"
