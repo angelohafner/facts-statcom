@@ -20,6 +20,10 @@ The **Advanced** disclosure provides `V`, `X`, and `Imax` sliders for additional
 
 Default example: `V=1.00 pu`, `X=0.20 pu`, `E=1.10 pu`, `Imax=1.00 pu`, `delta=0°`. Use the `Inductive`, `Neutral`, and `Capacitive` presets to change only E.
 
+## Fixed axes throughout the interactive laboratory
+
+The phasor, fundamental-waveform and both operating-point plots now use fixed numerical axis ranges during all slider movements, including advanced grid-voltage and reactance settings. Waveforms use two **separately labeled, fixed vertical scales** for voltage and current so neither signal is visually flattened. The limits cover the entire advertised slider envelope, including the ideal out-of-rating operating points; dashed curves and warnings remain unchanged. For the precise per-unit limits and verification, see [FIXED_AXES.md](FIXED_AXES.md).
+
 ## Numerical and sign conventions
 
 This lesson reuses the conventions from [`docs/operation.md`](../operation.md) and `facts_statcom.operation.physics`:

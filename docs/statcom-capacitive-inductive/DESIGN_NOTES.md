@@ -19,3 +19,7 @@ python docs/statcom-capacitive-inductive/source/build.py
 ```
 
 The exported HTML is fully standalone; no PowerPoint file is produced.
+
+## Fixed-scale laboratory plots
+
+Phasors, dual-axis fundamental waveforms, and operating-point characteristics use invariant numerical scales throughout the entire slider envelope. The six static reference SVGs are intentionally preserved, and the original electrical model is unchanged. See [FIXED_AXES.md](FIXED_AXES.md) for ranges, derivation and tests.
