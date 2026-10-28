@@ -2,7 +2,7 @@
 
 **STATCOM / STATCON** electrical diagrams created with Python. The project is a **standalone, editable-SVG schematic generator**, with structural netlist checks and reusable components. It is designed to remain API- and style-compatible with [facts-svc](https://github.com/angelohafner/facts-svc), without importing from or modifying that repository.
 
-**Important:** These are **educational circuit drawings**, not load flow, EMT or switching simulations. Gate controls, DC voltages, power ratings, modulation and dynamics are not solved.
+**Important:** The circuit figures are **educational vector drawings**, not load flow or EMT simulations. A separate module supplies idealized phasor and simplified averaged-PI operating plots; it does not solve converter switching, dc-link energy, detailed system dynamics or real equipment controls.
 
 ## Gallery
 
@@ -22,6 +22,26 @@ Open the [HTML gallery](examples/gallery/index.html) locally to compare all eigh
 ### Full three-level NPC example
 
 ![Three-level neutral-point-clamped converter](examples/gallery/npc.svg)
+
+## Operation plots — separate educational model (v0.2)
+
+The repository now also generates **13 editable figures of STATCOM operation** (Q versus converter voltage, reactive current, phasors, power angle, V–I droop, current limits, fundamental voltage/current waveforms, and voltage/current/Q/converter-voltage responses). This is a separate numerical/Matplotlib package, not an extension of the circuit renderer.
+
+[Browse the operation gallery](examples/operation/gallery/index.html) · [Model equations, signs and limitations](docs/operation.md)
+
+```bash
+python -m pip install -e '.[plots]'
+python -m facts_statcom.operation --all --format both --output-dir output/operation
+python -m facts_statcom.operation --figure voltage-response --config examples/operation_default.json
+# Or use the standalone installed script:
+facts-statcom-plots --list-figures
+```
+
+The original `facts-statcom` CLI and all 8 circuit schematics remain available unchanged. Operation figures use pure fundamental phasor / simplified PI dynamics and **must not be treated as EMT simulation results**. Numerical plots can be generated with Matplotlib independently of the diagram renderer.
+
+### Example operation plot
+
+![STATCOM Q vs E at zero angle](examples/operation/gallery/reactive-power-vs-e.svg)
 
 ## Installation
 
@@ -83,17 +103,24 @@ facts-statcom/
 │   ├── symbols.py       # IGBT, diode, reactors, capacitors, cells
 │   ├── renderer.py      # Schematic layouts and circuit composition
 │   ├── cli.py           # JSON input and reproducible generation
+│   ├── operation/      # Numerical phasor/control models and separate Matplotlib charts
 │   └── __main__.py
 ├── examples/
 │   ├── gallery/         # Eight actual vector SVGs + gallery page
+│   ├── operation/       # Thirteen operating-point diagrams and HTML gallery
+│   ├── operation_default.json # Custom operating and control model configuration
 │   └── *.json           # Configurable examples
 ├── docs/
 │   ├── architecture.md
+│   ├── operation.md     # Numerical equations, directions, physics and limitations
 │   └── electrical-audit.md
 ├── tests/
 │   ├── test_model.py
 │   ├── test_netlist.py
-│   └── test_renderer.py
+│   ├── test_renderer.py
+│   ├── test_operation_physics.py
+│   ├── test_operation_control.py
+│   └── test_operation_figures.py
 └── .github/workflows/tests.yml
 ```
 

@@ -1,0 +1,30 @@
+{
+  "coupling": {
+    "v_pcc_pu": 1.0,
+    "x_coupling_pu": 0.2,
+    "i_limit_pu": 1.0,
+    "frequency_hz": 60.0
+  },
+  "control": {
+    "v_ref_pu": 1.0,
+    "droop_pu_per_i_pu": 0.03,
+    "current_limit_pu": 0.8,
+    "grid_x_pu": 0.12,
+    "kp": 7.0,
+    "ki_per_s": 220.0,
+    "antiwindup_per_s": 40.0,
+    "current_time_constant_s": 0.012,
+    "measurement_time_constant_s": 0.01
+  },
+  "converter_voltage_low_pu": 0.75,
+  "converter_voltage_high_pu": 1.25,
+  "nominal_e_pu": 1.06,
+  "nominal_angle_deg": 0.0,
+  "voltage_events": [
+    {"time_s": 0.0, "v_thevenin_pu": 1.0},
+    {"time_s": 0.15, "v_thevenin_pu": 0.88},
+    {"time_s": 0.42, "v_thevenin_pu": 1.045}
+  ],
+  "end_time_s": 0.75,
+  "time_step_s": 0.0005
+}

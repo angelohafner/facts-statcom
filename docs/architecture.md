@@ -13,6 +13,9 @@ The public core symbols and canvas **parallel** `facts-svc`, but the device mode
 | `symbols.SwitchingCell`, `MMCSubmodule` | Reusable physical converter cells | Reusable for converters and HVDC VSC |
 | `renderer.STATCOMRenderer` | Layouts of 2L, NPC, CHB, MMC, grid and control | STATCOM-specific composition |
 | `cli.main` | JSON, presets and galleries | Common CLI structure |
+| `operation.physics` / `operation.control` | Fundamental AC phasors and a low-order controller surrogate | Independent numerical model usable without Matplotlib |
+| `operation.figures` | Matplotlib charts, editable SVG text and PNG | Palette compatibility only; no circuit SVG renderer import |
+| `operation.cli` | Separate JSON-configurable figure generation | Independent entry point, no changes to circuit CLI |
 
 The reuse boundary is intentionally at the **public API** rather than directly importing `facts_svc` classes. A future migration could make both packages depend on `power_diagrams_core`, leaving re-export shims in both packages. It should be a distinct project with its own tests and semantic versioning.
 
@@ -40,3 +43,9 @@ The reuse boundary is intentionally at the **public API** rather than directly i
 3. Extract a stable `power-diagrams-core` package after testing against both projects.
 4. Add switch states, EMT waveform sources, control-system plots and optional simulator inputs as separate modules, **not inside** the SVG primitive engine.
 5. Avoid treating diagram geometry as a simulation. Dynamic models will need separate equations and validation.
+
+## Independent operation examples (v0.2)
+
+The operating-point engine uses the immutable `OperationCase` configuration and the pure-stdlib `CouplingModel` / `VoltageControlConfig` numerical modules. Chart rendering is optional and depends on Matplotlib only; it does not instantiate `STATCOMRenderer` or `SVGCanvas`. The root `facts_statcom` exports its legacy schematic API lazily to avoid importing circuit geometry when a user imports only the operation models.
+
+See [operation.md](operation.md) for the verified Q sign convention, phasor equations, controller assumptions and physical limitations. The `examples/operation/gallery` SVGs are independent of the eight existing circuit diagrams.

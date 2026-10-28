@@ -19,3 +19,5 @@ jobs:
         run: python -m pytest -q
       - name: Render all SVGs
         run: python -m facts_statcom --all --output-dir output
+      - name: Render 13 operating-point SVG charts
+        run: python -m facts_statcom.operation --all --output-dir output/operation

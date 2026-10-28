@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "facts-statcom"
-version = "0.1.0"
+version = "0.2.0"
 description = "Reusable, editable SVG diagrams for STATCOM and STATCON topologies"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -13,10 +13,12 @@ dependencies = []
 
 [project.optional-dependencies]
 png = ["cairosvg>=2.7"]
-dev = ["pytest>=7"]
+plots = ["matplotlib>=3.8"]
+dev = ["pytest>=7", "matplotlib>=3.8"]
 
 [project.scripts]
 facts-statcom = "facts_statcom.cli:main"
+facts-statcom-plots = "facts_statcom.operation.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
